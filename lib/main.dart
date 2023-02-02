@@ -44,28 +44,56 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.w800,
             ),
           ),
-          const Text(
-            "0",
-            style: TextStyle(
-              fontSize: 100,
-              color: Colors.white,
+          const Padding(
+            padding: EdgeInsets.all(40),
+            child: Text(
+              "0",
+              style: TextStyle(
+                fontSize: 100,
+                color: Colors.white,
+              ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  fixedSize: const Size(100, 100),
+                  primary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
                 onPressed: decrement,
-                child: Text(
+                child: const Text(
                   "Saiu",
-                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
               ),
+              const SizedBox(
+                width: 32,
+              ),
               TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  fixedSize: const Size(100, 100),
+                  primary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
                 onPressed: increment,
-                child: Text(
+                child: const Text(
                   "Entrou",
-                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
               )
             ],
