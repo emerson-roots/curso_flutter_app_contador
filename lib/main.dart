@@ -12,94 +12,113 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
 }
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
 
   void decrement() {
-    print('Decrement');
+    setState(() {
+      count--;
+    });
   }
 
   void increment() {
-    print('Increment');
+    setState(() {
+      count++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Pode entrar",
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(40),
-            child: Text(
-              "0",
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/sorveteria.jpg'),
+                fit: BoxFit.cover
+            )
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Cliente saiu ou entrou?",
               style: TextStyle(
-                fontSize: 100,
-                color: Colors.white,
+                fontSize: 35,
+                color: Colors.yellow,
+                fontWeight: FontWeight.w800,
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(100, 100),
-                  primary: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                ),
-                onPressed: decrement,
-                child: const Text(
-                  "Saiu",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
+            Padding(
+              padding: const EdgeInsets.all(40),
+              child: Text(
+                '$count',
+                style: const TextStyle(
+                  fontSize: 100,
+                  color: Colors.greenAccent,
                 ),
               ),
-              const SizedBox(
-                width: 32,
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  fixedSize: const Size(100, 100),
-                  primary: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.cyan,
+                    fixedSize: const Size(100, 100),
+                    primary: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  onPressed: decrement,
+                  child: const Text(
+                    "Saiu",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                onPressed: increment,
-                child: const Text(
-                  "Entrou",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
+                const SizedBox(
+                  width: 32,
                 ),
-              )
-            ],
-          )
-        ],
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.pink,
+                    fixedSize: const Size(100, 100),
+                    primary: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  onPressed: increment,
+                  child: const Text(
+                    "Entrou",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
+
