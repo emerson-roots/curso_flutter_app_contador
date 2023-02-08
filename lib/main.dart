@@ -12,14 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
 }
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -39,6 +41,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  bool get isEmpty => count <= 0;
+
+  bool get isFull => count > 19;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,17 +53,15 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/sorveteria.jpg'),
-                fit: BoxFit.cover
-            )
-        ),
+                fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Cliente saiu ou entrou?",
+            Text(
+              isFull ? "Está lotado!!!" : "Cliente saiu ou entrou?",
               style: TextStyle(
                 fontSize: 35,
-                color: Colors.yellow,
+                color: isFull ? Colors.red : Colors.yellow,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -65,9 +69,9 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(40),
               child: Text(
                 '$count',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 100,
-                  color: Colors.greenAccent,
+                  color: isFull ? Colors.red : Colors.greenAccent,
                 ),
               ),
             ),
@@ -76,14 +80,15 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.cyan,
+                    backgroundColor:
+                        isEmpty ? Colors.cyan.withOpacity(0.3) : Colors.cyan,
                     fixedSize: const Size(100, 100),
                     primary: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
                   ),
-                  onPressed: decrement,
+                  onPressed: isEmpty ? null : decrement,
                   child: const Text(
                     "Saiu",
                     style: TextStyle(
@@ -97,14 +102,15 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.pink,
+                    backgroundColor:
+                        isFull ? Colors.pink.withOpacity(0.4) : Colors.pink,
                     fixedSize: const Size(100, 100),
                     primary: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
                   ),
-                  onPressed: increment,
+                  onPressed: isFull ? null : increment,
                   child: const Text(
                     "Entrou",
                     style: TextStyle(
@@ -121,4 +127,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
